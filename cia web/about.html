@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>PersonalWebsite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background-color: #FFB6C1;
+            overflow-y: auto;
+            -ms-overflow-style: auto;
+            scrollbar-width: auto;
+            padding-top: 72px;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(255, 182, 193, 0);
+        }
+
+        header h1 {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            opacity: 1;
+            transition: opacity 0.5s ease 0.3s;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto 48px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .intro h2 {
+            font-weight: 700;
+            font-size: 32px;
+            margin: 0 0 16px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .intro p {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.4;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+        }
+
+        .intro h2.show,
+        .intro p.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+
+        form {
+            background-color: #3c3a3a;
+            border-radius: 20px;
+            padding: 32px 32px 40px;
+            box-shadow: 0 0 20px 6px rgba(0, 0, 0, 0.8), 0 0 40px 10px rgba(0, 0, 0, 0.6);
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100%;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            backface-visibility: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        form.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        form.scroll-down {
+            transform: translateY(-100px);
+            transition: transform 0.5s ease;
+            z-index: 10;
+        }
+
+        form.scroll-up {
+            transform: translateY(100px);
+            transition: transform 0.5s ease;
+            z-index: 2;
+        }
+
+        .intro.scroll-down {
+            transform: translateY(200px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .intro.scroll-up {
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        form label {
+            font-weight: 400;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: white;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        form label.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            background-color: #222020;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 16px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            resize: none;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+        }
+
+        input[type="text"].show,
+        textarea.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: #999;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            align-self: center;
+            background-color: #a72f5a;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 48px;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+        }
+
+        button.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #8a274a;
+            outline: none;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .photo-container {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            position: relative;
+            opacity: 0;
+            transform: rotateY(-30deg) translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            backface-visibility: hidden;
+            height: auto; /* Changed to auto */
+        }
+
+        .photo-container.show {
+            opacity: 1;
+            transform: rotateY(0deg) translateX(0);
+        }
+
+        .photo-container.scroll-down {
+            transform: translateY(-100px);
+            transition: transform 0.5s ease;
+            z-index: 10;
+        }
+
+        .photo-container.scroll-up {
+            transform: translateY(100px);
+            transition: transform 0.5s ease;
+            z-index: 2;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 24px;
+            }
+
+            nav {
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 16px;
+            }
+
+            nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            form, .photo-container {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+
+            .photo-container {
+                height: auto; /* Changed to auto */
+            }
+
+            .photo-container img {
+                height: 100%;
+            }
+        }
+
+        #hello-kitty-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Style untuk input yang sudah diisi */
+        input[readonly],
+        textarea[readonly] {
+            opacity: 0.8;
+            background-color: #222020;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="hidden">PersonalWebsite.</h1>
+        <nav class="hidden">
+            <a href="homepage.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portofolio.html">Portofolio</a>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h2 class="hidden">Kenal lebih jauh yuk.</h2>
+            <p class="hidden">
+                Yuk, kenalan lebih dekat! Di halaman "Kenal Lebih Jauh Yuk", Anda bisa temukan cerita tentang saya,
+                mulai dari tanggal saya lahir hingga apa yang saya sukai. Mari saling memahami dan berbagi sedikit
+                tentang perjalanan ini. Klik dan temukan lebih dalam tentang siapa saya sebenarnya!
+            </p>
+        </section>
+        <section class="content">
+            <form class="hidden">
+                <label for="name" class="hidden">Nama?</label>
+                <input autocomplete="off" id="name" name="name" type="text" class="hidden" value="alvira widya putri" readonly/>
+                <label for="address" class="hidden">Alamat?</label>
+                <input autocomplete="off" id="address" name="address" type="text" class="hidden" value="perum puri kartika indah puskopad" readonly/>
+                <label for="birthplace" class="hidden">Tempat tanggal lahir?</label>
+                <input autocomplete="off" id="birthplace" name="birthplace" type="text" class="hidden" value="malang, 1 mei 2007" readonly/>
+                <button type="submit" class="hidden">Kirim</button>
+            </form>
+            <div class="photo-container hidden">
+                <img src="img/mumu.jpg" alt="Gambar 1" class="slide active">
+                <img src="img/mumu2.jpg" alt="Gambar 2" class="slide">
+                <img src="img/mumu3.jpg" alt="Gambar 3" class="slide">
+            </div>
+        </section>
+    </main>
+    <canvas id="hello-kitty-canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('hello-kitty-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const circles = [];
+        const numCircles = 20;
+
+        function generateRandomColor() {
+            const hue = Math.random() * 360;
+            const saturation = 60 + Math.random() * 20;
+            const lightness = 50 + Math.random() * 10;
+            return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        }
+
+        class Circle {
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.opacity = 0;
+                this.fadeInSpeed = 0.05;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity = Math.min(1, this.opacity + this.fadeInSpeed);
+
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.speedX = -this.speedX;
+                }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.speedY = -this.speedY;
+                }
+            }
+
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function initCircles() {
+            for (let i = 0; i < numCircles; i++) {
+                const radius = Math.random() * 20 + 10;
+                const x = Math.random() * (canvas.width - 2 * radius) + radius;
+                const y = Math.random() * (canvas.height - 2 * radius) + radius;
+                const color = generateRandomColor();
+                circles.push(new Circle(x, y, radius, color));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < numCircles; i++) {
+                circles[i].update();
+                circles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initCircles();
+        animate();
+
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 3000);
+
+        function showElements() {
+            const elements = document.querySelectorAll('.hidden');
+            let delay = 0;
+
+            elements.forEach(element => {
+                setTimeout(() => {
+                    element.classList.add('show');
+                }, delay);
+                delay += 200;
+            });
+
+            const formElement = document.querySelector('form');
+            const introElement = document.querySelector('.intro');
+            const photoContainer = document.querySelector('.photo-container');
+            let isScrolledDown = false;
+            let previousScrollY = 0;
+
+            window.addEventListener('scroll', () => {
+                const formRect = formElement.getBoundingClientRect();
+                const introRect = introElement.getBoundingClientRect();
+                const formVisible = formRect.top < window.innerHeight && formRect.bottom > 0;
+                const currentScrollY = window.scrollY;
+                const isScrollingDown = currentScrollY > previousScrollY;
+                previousScrollY = currentScrollY;
+
+                if (formVisible && !isScrolledDown) {
+                    formElement.classList.remove('scroll-up');
+                    formElement.classList.add('scroll-down');
+                    introElement.classList.add('scroll-down');
+                    photoContainer.classList.remove('scroll-up');
+                    photoContainer.classList.add('scroll-down');
+                    isScrolledDown = true;
+                } else if (!formVisible && isScrolledDown) {
+                    formElement.classList.remove('scroll-down');
+                    formElement.classList.add('scroll-up');
+                    introElement.classList.remove('scroll-down');
+                    introElement.classList.add('scroll-up');
+                    photoContainer.classList.remove('scroll-down');
+                    photoContainer.classList.add('scroll-up');
+                    isScrolledDown = false;
+                }
+            });
+
+             // Adjust photo container height on load and resize
+            function adjustPhotoContainerHeight() {
+                const formHeight = formElement.offsetHeight;
+                photoContainer.style.height = `${formHeight}px`;
+            }
+
+            adjustPhotoContainerHeight(); // Call on load
+            window.addEventListener('resize', adjustPhotoContainerHeight); // Call on resize
+        }
+
+        window.addEventListener('load', showElements);
+    </script>
+</body>
+</html>

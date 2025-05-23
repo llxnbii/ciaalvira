@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>
+        Personal Website
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            height: 100%;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+            padding-top: 72px; /* Menambahkan padding-top agar konten tidak tertutup header */
+        }
+        img.bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            transition: opacity 1s ease;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            position: fixed; /* Membuat header tetap di posisinya */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: transparent; /* Membuat latar belakang header transparan */
+        }
+        header h1 {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        main {
+            max-width: 600px;
+            padding: 0 48px;
+            margin-top: 160px;
+            transition: all 0.5s ease;
+        }
+        main.second-view {
+            position: absolute;
+            left: 831px;
+            top: 188px;
+            max-width: 500px;
+            margin-top: 0;
+        }
+        main h2, main p, .button {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .visible {
+            opacity: 1;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #A53860;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 25px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background-color: #3A0519;
+            animation: loading 0.3s forwards;
+        }
+        @keyframes loading {
+            0% {
+                background-color: #3A0519;
+            }
+            50% {
+                background-color: #3A0519;
+            }
+            100% {
+                background-color: #3A0519;
+            }
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 24px;
+            }
+            nav {
+                gap: 24px;
+            }
+            main {
+                padding: 0 24px;
+                margin-top: 120px;
+                max-width: 100%;
+            }
+            main.second-view {
+                left: 24px;
+                top: 120px;
+                max-width: calc(100% - 48px);
+            }
+            main h2 {
+                font-size: 28px;
+            }
+            main p {
+                font-size: 13px;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 16px 16px;
+            }
+            nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            main {
+                margin-top: 100px;
+                padding: 0 16px;
+            }
+            main.second-view {
+                left: 16px;
+                top: 100px;
+                max-width: calc(100% - 32px);
+            }
+            main h2 {
+                font-size: 24px;
+            }
+            main p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img alt="ini mumu" class="bg-image" height="1080" src="img/Background.png" width="1920" id="background"/>
+        <header>
+            <h1>
+                PersonalWebsite.
+            </h1>
+            <nav>
+                <a href="homepage.html">
+                    Home
+                </a>
+                <a href="about.html">
+                    About
+                </a>
+                <a href="portofolio.html">
+                    Portofolio
+                </a>
+            </nav>
+        </header>
+        <main id="mainContent">
+            <h2 id="name">
+                Cia Alvira Widya.
+            </h2>
+            <p id="description">
+                Cia Alvira Widya, gadis lugu yang selalu riang. Senyumnya menawan, pancarkan keceriaan tulus. Kecantikannya alami, memukau setiap mata yang memandang. Auranya positif, membangkitkan semangat dan kekaguman. Kehadirannya membawa kehangatan, memancarkan kebaikan hati. Cia adalah perpaduan polos, riang, dan cantik yang menginspirasi.
+            </p>
+            <a href="#" class="button" id="continueButton">Lanjutkan</a>
+        </main>
+    </div>
+    <script>
+        // Data untuk background dan teks yang akan diganti
+        const contentData = [
+            {
+                bgImage: "img/Background.png",
+                name: "Cia Alvira Widya.",
+                description: "Cia Alvira Widya, gadis lugu yang selalu riang. Senyumnya menawan, pancarkan keceriaan tulus. Kecantikannya alami, memukau setiap mata yang memandang. Auranya positif, membangkitkan semangat dan kekaguman. Kehadirannya membawa kehangatan, memancarkan kebaikan hati. Cia adalah perpaduan polos, riang, dan cantik yang menginspirasi.",
+                buttonText: "Lanjutkan"
+            },
+            {
+                bgImage: "img/Background1.png",
+                name: "Cia Alvira Widya.",
+                description: "Innocent charm radiates from Cia Alvira Wiidya, her laughter a constant melody. Her beauty, unpretentious yet striking, captivates onlookers. A gentle spirit shines through her bright eyes, inspiring warmth and admiration. Cia's presence is a breath of fresh air, a reminder of simple joys and heartfelt sincerity. Her captivating grace leaves a lasting impression.",
+                buttonText: "Kembali"
+            }
+        ];
+
+        let currentContentIndex = 0;
+
+        // Fungsi untuk menambahkan kelas 'visible' setelah delay
+        function showText() {
+            const name = document.getElementById('name');
+            const description = document.getElementById('description');
+            const button = document.querySelector('.button');
+            name.classList.add('visible');
+            description.classList.add('visible');
+            button.classList.add('visible');
+        }
+
+        // Fungsi untuk mengganti konten
+        function changeContent() {
+            currentContentIndex = (currentContentIndex + 1) % contentData.length;
+            const content = contentData[currentContentIndex];
+
+            // Animasi fade out
+            document.getElementById('name').classList.remove('visible');
+            document.getElementById('description').classList.remove('visible');
+            document.getElementById('continueButton').classList.remove('visible');
+
+            // Setelah fade out, ganti konten dan fade in
+            setTimeout(() => {
+                document.getElementById('name').textContent = content.name;
+                document.getElementById('description').textContent = content.description;
+                document.getElementById('background').src = content.bgImage;
+                document.getElementById('continueButton').textContent = content.buttonText;
+
+                // Tambahkan kelas untuk tampilan kedua
+                const mainContent = document.getElementById('mainContent');
+                if (currentContentIndex === 1) {
+                    mainContent.classList.add('second-view');
+                } else {
+                    mainContent.classList.remove('second-view');
+                }
+
+                document.getElementById('name').classList.add('visible');
+                document.getElementById('description').classList.add('visible');
+                document.getElementById('continueButton').classList.add('visible');
+            }, 500);
+        }
+
+        // Menjalankan fungsi showText setelah 1 detik
+        setTimeout(showText, 1000);
+
+        // Menambahkan event listener untuk tombol
+        document.getElementById('continueButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            changeContent();
+        });
+    </script>
+</body>
+</html>

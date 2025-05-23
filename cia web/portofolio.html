@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>CV - Alvira Widya Putri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background-color: #FFB6C1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: transparent; /* Changed to transparent */
+            backdrop-filter: none; /* Removed backdrop-filter */
+        }
+
+        header h1 {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            width: 100%;
+            margin: 80px 0 0 0;
+            padding: 0;
+            position: relative;
+            z-index: 10;
+            flex: 1;
+        }
+
+        .intro {
+            text-align: center;
+            margin: 48px 0;
+            padding: 0 24px;
+        }
+
+        .intro h2 {
+            font-weight: 700;
+            font-size: 32px;
+            margin: 0 0 16px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .intro p {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 32px;
+            padding: 20px 24px;
+            scroll-snap-type: x mandatory;
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            max-width: 90%;
+            scroll-behavior: smooth;
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cv-section {
+            background-color: rgba(60, 58, 58, 0.9);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            min-width: 300px;
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+            height: 17cm;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backface-visibility: hidden;
+            position: relative;
+            z-index: 2;
+            scroll-snap-align: start;
+            margin: 0 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cv-section:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cv-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cv-section h3 {
+            margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: #FFB6C1;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .cv-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #FFB6C1;
+            border-radius: 3px;
+        }
+
+        .cv-section p {
+            margin: 8px 0;
+            font-size: 15px;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        .info-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 24px;
+        }
+
+        .info-group label {
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFB6C1;
+        }
+
+        .contact-info, .education-info, .skills-info, .about-info { /* Added .about-info */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .contact-info > div,
+        .education-info > div,
+        .skills-info > div,
+        .about-info > div { /* Added .about-info */
+            flex: 1 1 150px;
+            margin-bottom: 16px;
+            background: rgba(255, 182, 193, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info > div:hover,
+        .education-info > div:hover,
+        .skills-info > div:hover,
+        .about-info > div:hover { /* Added .about-info */
+            background: rgba(255, 182, 193, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .skills {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+
+        .skills li {
+            background: rgba(102, 126, 234, 0.7);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            font-size: 14px;
+            word-wrap: break-word;
+            transition: all 0.3s ease;
+        }
+
+        .skills li:hover {
+            background: rgba(102, 126, 234, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        a {
+            color: #FFB6C1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        #hello-kitty-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(177, 23, 129, 0.7);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0.8;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .scroll-button:hover {
+            opacity: 1;
+            background-color: rgba(177, 23, 129, 0.9);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .scroll-button.left {
+            left: 20px;
+        }
+
+        .scroll-button.right {
+            right: 20px;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .circle-bg {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .zoom-out {
+            transform: scale(0.9);
+            transition: transform 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 24px;
+            }
+
+            nav {
+                gap: 24px;
+            }
+            
+            .content {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .contact-info > div,
+            .education-info > div,
+            .skills-info > div,
+            .about-info > div { /* Added .about-info */
+                flex-basis: 100%;
+                max-width: none;
+            }
+            
+            .intro h2 {
+                font-size: 28px;
+            }
+            
+            .intro p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 16px;
+            }
+
+            nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            
+            .cv-section {
+                padding: 24px;
+            }
+            
+            .cv-section h3 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .info-group label {
+                font-size: 15px;
+            }
+            
+            .skills li {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .scroll-button {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
+                padding: 0 20px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                max-width: 600px;
+            }
+
+            .cv-section {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                margin: 0 0 20px 0;
+            }
+            
+            .scroll-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="hidden">PersonalWebsite.</h1>
+        <nav class="hidden">
+            <a href="homepage.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portofolio.html">Portofolio</a>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <div class="cv-section hidden">
+                <h3>About Me</h3>
+                <div class="info-group about-info">
+                    <div>
+                        <p>Halo! Saya Alvira Widya Putri, seorang siswa SMK yang penuh semangat dan berdedikasi tinggi. Saya memiliki ketertarikan yang besar pada dunia kopi dan terus berusaha untuk mempelajari hal-hal baru dengan cepat. Saya adalah individu yang proaktif, disiplin, dan bertanggung jawab, serta mudah berinteraksi dengan orang lain untuk membangun suasana nyaman di lingkungan kerja.</p>
+                        <p>Dengan kemampuan problem-solving yang baik, saya cepat beradaptasi menghadapi kendala dan selalu responsif dalam melayani pelanggan. Saya juga sangat menjaga kebersihan area kerja dan memahami standar kebersihan F&B. Saya siap untuk bekerja dalam situasi sibuk sambil tetap mempertahankan fokus dan ketelitian.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-section hidden">
+                <h3>Contact</h3>
+                <div class="info-group contact-info">
+                    <div>
+                        <label for="phone">Phone</label>
+                        <p id="phone">+62 858 0611 5791</p>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <p id="email"><a href="mailto:viracantik329@gmail.com">viracantik329@gmail.com</a></p>
+                    </div>
+                    <div>
+                        <label for="instagram">Instagram</label>
+                        <p id="instagram"><a href="https://instagram.com/ciaalviraaa" target="_blank">@ciaalviraaa</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-section hidden">
+                <h3>Education</h3>
+                <div class="info-group education-info">
+                    <div>
+                        <label for="smk">SMK</label>
+                        <p id="smk">SMK Negeri 12 Malang<br><small>2023-sekarang</small></p>
+                    </div>
+                    <div>
+                        <label for="smp">SMP</label>
+                        <p id="smp">SMP Islam Bani Hasyim<br><small>2020-2023</small></p>
+                    </div>
+                    <div>
+                        <label for="sd">SD</label>
+                        <p id="sd">SDN 02 Randuagung<br><small>2019-2020</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-section hidden">
+                <h3>Skills</h3>
+                <div class="info-group skills-info">
+                    <div>
+                        <label>Interpersonal Skills</label>
+                        <ul class="skills">
+                            <li>Mudah berinteraksi dengan pelanggan</li>
+                            <li>Membangun suasana nyaman di tempat kerja</li>
+                            <li>Proaktif dalam operasional</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <label>Problem Solving</label>
+                        <ul class="skills">
+                            <li>Berpikir cepat menghadapi kendala</li>
+                            <li>Responsif dalam melayani pelanggan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-section hidden">
+                <h3>Professional Skills</h3>
+                <div class="info-group skills-info">
+                    <div>
+                        <label>Work Ethic</label>
+                        <ul class="skills">
+                            <li>Disiplin dan bertanggung jawab</li>
+                            <li>Memberikan yang terbaik</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <label>F&B Expertise</label>
+                        <ul class="skills">
+                            <li>Ketertarikan tinggi pada dunia kopi</li>
+                            <li>Mempelajari hal baru dengan cepat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-section hidden">
+                <h3>Additional Skills</h3>
+                <div class="info-group skills-info">
+                    <div>
+                        <label>Hygiene Standards</label>
+                        <ul class="skills">
+                            <li>Menjaga kebersihan area kerja</li>
+                            <li>Memahami standar kebersihan F&B</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <label>Work Performance</label>
+                        <ul class="skills">
+                            <li>Bekerja dalam situasi sibuk</li>
+                            <li>Mempertahankan fokus dan ketelitian</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <button class="scroll-button left" onclick="scrollContent(-1)">❮</button>
+        <button class="scroll-button right" onclick="scrollContent(1)">❯</button>
+    </main>
+    <canvas id="hello-kitty-canvas"></canvas>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('hello-kitty-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const circles = [];
+            const numCircles = 20;
+
+            function generateRandomColor() {
+                const hue = Math.random() * 360;
+                const saturation = 60 + Math.random() * 20;
+                const lightness = 50 + Math.random() * 10;
+                return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            }
+
+            class Circle {
+                constructor(x, y, radius, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                    this.color = color;
+                    this.speedX = Math.random() * 3 - 1.5;
+                    this.speedY = Math.random() * 3 - 1.5;
+                    this.opacity = 0;
+                    this.fadeInSpeed = 0.05;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.opacity = Math.min(1, this.opacity + this.fadeInSpeed);
+
+                    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                        this.speedX = -this.speedX;
+                    }
+                    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                        this.speedY = -this.speedY;
+                    }
+                }
+
+                draw() {
+                    ctx.globalAlpha = this.opacity;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            function initCircles() {
+                for (let i = 0; i < numCircles; i++) {
+                    const radius = Math.random() * 20 + 10;
+                    const x = Math.random() * (canvas.width - 2 * radius) + radius;
+                    const y = Math.random() * (canvas.height - 2 * radius) + radius;
+                    const color = generateRandomColor();
+                    circles.push(new Circle(x, y, radius, color));
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < numCircles; i++) {
+                    circles[i].update();
+                    circles[i].draw();
+                }
+                requestAnimationFrame(animate);
+            }
+
+            initCircles();
+            animate();
+
+            // Create background floating circles
+            function createBackgroundCircles() {
+                const container = document.body;
+                const colors = ['rgba(255,182,193,0.1)', 'rgba(255,255,255,0.08)', 'rgba(177,23,129,0.1)'];
+                
+                for (let i = 0; i < 5; i++) {
+                    const circle = document.createElement('div');
+                    circle.className = 'circle-bg';
+                    
+                    const size = Math.random() * 300 + 100;
+                    const posX = Math.random() * window.innerWidth;
+                    const posY = Math.random() * window.innerHeight;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const delay = Math.random() * 5;
+                    const duration = Math.random() * 10 + 10;
+                    
+                    circle.style.width = `${size}px`;
+                    circle.style.height = `${size}px`;
+                    circle.style.left = `${posX}px`;
+                    circle.style.top = `${posY}px`;
+                    circle.style.background = color;
+                    circle.style.animationDelay = `${delay}s`;
+                    circle.style.animationDuration = `${duration}s`;
+                    
+                    document.body.appendChild(circle);
+                }
+            }
+
+            // Animate elements on page load
+            function animateOnLoad() {
+                // Header animation
+                document.querySelector('header h1').style.animation = 'slideInFromLeft 0.8s ease-out forwards';
+                document.querySelector('nav').style.animation = 'slideInFromRight 0.8s ease-out forwards';
+                
+                // Section animations
+                const sections = document.querySelectorAll('.cv-section');
+                sections.forEach((section, index) => {
+                    section.style.animation = `fadeIn 0.8s ease-out ${index * 0.2}s forwards`;
+                });
+            }
+
+            // Setup scroll animations
+            let lastScrollTop = 0;
+
+            window.addEventListener('scroll', function() {
+                const intro = document.querySelector('.intro'); // This will now be null as the intro section is removed
+                const sections = document.querySelectorAll('.cv-section');
+
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                // The logic for 'intro' visibility will no longer apply as the element is removed.
+                // The sections will still animate based on their initial 'hidden' class and the animateOnLoad function.
+
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            });
+
+            // Setup button effects
+            function setupButtonEffects() {
+                document.querySelectorAll('.scroll-button').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        const ripple = document.createElement('span');
+                        ripple.className = 'ripple';
+                        
+                        const rect = button.getBoundingClientRect();
+                        const size = Math.max(rect.width, rect.height);
+                        const x = e.clientX - rect.left - size/2;
+                        const y = e.clientY - rect.top - size/2;
+                        
+                        ripple.style.width = ripple.style.height = `${size}px`;
+                        ripple.style.left = `${x}px`;
+                        ripple.style.top = `${y}px`;
+                        
+                        button.appendChild(ripple);
+                        
+                        setTimeout(() => {
+                            ripple.remove();
+                        }, 600);
+                    });
+                });
+            }
+
+            // Initialize animations
+            createBackgroundCircles();
+            setupButtonEffects();
+            animateOnLoad();
+
+            // Scroll content function
+            window.scrollContent = function(direction) {
+                const content = document.querySelector('.content');
+                const scrollAmount = window.innerWidth * 0.8;
+                
+                content.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+                
+                const button = direction === -1 ? 
+                    document.querySelector('.scroll-button.left') : 
+                    document.querySelector('.scroll-button.right');
+                
+                button.classList.add('animate-pulse');
+                setTimeout(() => {
+                    button.classList.remove('animate-pulse');
+                }, 1000);
+            };
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            // Zoom out effect on hover
+            const cvSections = document.querySelectorAll('.cv-section');
+
+            cvSections.forEach(section => {
+                let zoomTimeout;
+
+                section.addEventListener('mouseenter', () => {
+                    zoomTimeout = setTimeout(() => {
+                        section.classList.add('zoom-out');
+                    }, 2000); // 2 detik
+                });
+
+                section.addEventListener('mouseleave', () => {
+                    clearTimeout(zoomTimeout);
+                    section.classList.remove('zoom-out');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
